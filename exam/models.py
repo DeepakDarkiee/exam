@@ -5,6 +5,8 @@ class Course(models.Model):
    course_name = models.CharField(max_length=50)
    question_number = models.PositiveIntegerField()
    total_marks = models.PositiveIntegerField()
+   next_attempt = models.BooleanField(default=True)
+   timer=models.PositiveIntegerField(help_text="In Minutes",default=2)
    def __str__(self):
         return self.course_name
 

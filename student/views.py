@@ -5,7 +5,7 @@ from django.contrib.auth.models import Group
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required,user_passes_test
 from django.conf import settings
-from datetime import date, timedelta
+from datetime import date, timedelta,datetime
 from exam import models as QMODEL
 from teacher import models as TMODEL
 
@@ -70,6 +70,7 @@ def take_exam_view(request,pk):
 @user_passes_test(is_student)
 def start_exam_view(request,pk):
     course=QMODEL.Course.objects.get(id=pk)
+    attempt=QMODEL.Course.objects.filter(id=pk).update(next_attempt=False)
     questions=QMODEL.Question.objects.all().filter(course=course)
     if request.method=='POST':
         pass
@@ -100,9 +101,12 @@ def calculate_marks_view(request):
         result.student=student
         result.save()
 
-        return HttpResponseRedirect('view-result')
+        return HttpResponseRedirect('end-exam')
 
-
+@login_required(login_url='studentlogin')
+@user_passes_test(is_student)
+def end_exam(request):
+    return render(request, 'student/end_exam.html'  )
 
 @login_required(login_url='studentlogin')
 @user_passes_test(is_student)
