@@ -45,6 +45,7 @@ def student_dashboard_view(request):
     
     'total_course':QMODEL.Course.objects.all().count(),
     'total_question':QMODEL.Question.objects.all().count(),
+    'notices':QMODEL.Notices.objects.all()
     }
     return render(request,'student/student_dashboard.html',context=dict)
 

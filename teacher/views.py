@@ -51,7 +51,8 @@ def teacher_dashboard_view(request):
     
     'total_course':QMODEL.Course.objects.all().count(),
     'total_question':QMODEL.Question.objects.all().count(),
-    'total_student':SMODEL.Student.objects.all().count()
+    'total_student':SMODEL.Student.objects.all().count(),
+    'notices':QMODEL.Notices.objects.all()
     }
     return render(request,'teacher/teacher_dashboard.html',context=dict)
 
