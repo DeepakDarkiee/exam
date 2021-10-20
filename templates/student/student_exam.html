@@ -32,6 +32,8 @@
         <tr>
 
           <th>Exam Name</th>
+          <th>Number Of Questions</th>
+          <th>Total Marks</th>
           
           <th>Action</th>
         </tr>
@@ -40,22 +42,26 @@
       <tr>
 
         <td> {{t.course_name}}</td>
+        <td> {{t.questions.count}}</td>
+        <td> {{t.total_marks}}</td>
         
           
         {% if t.next_attempt %}
-        <td><a class="btn btn-success btn-sm confirm-exam start-exam" onclick="trackOpenWindow();" style="border-radius:0px;" href="javascript:void(0)"><span class="glyphicon glyphicon-check"></span> Attend Exam</a></td>
+        <td><a class="btn btn-success btn-sm confirm-exam start-exam"  onclick="trackOpenWindow();" style="border-radius:0px;" href="javascript:void(0)"><span class="glyphicon glyphicon-check"></span> Attend Exam</a></td>
         {% else %}
-        <td><a class="btn btn-danger btn-sm attempt-exam" style="border-radius:0px;" href="{% url 'view-result'   %}"><span class="glyphicon glyphicon-check"></span> Attend Exam</a></td>
+        <td><a class="btn btn-success btn-sm confirm-exam start-exam"  disabled="true"  style="border-radius:0px;" href="javascript:void(0)"><span class="glyphicon glyphicon-check"></span> Attend Exam</a></td>
+       
         {% endif %}
       </tr>
       <script type="text/javascript">
-        function trackOpenWindow() {
+          $(document).on('click', '.confirm-exam', function(){
+          confirm('Are you sure you want to attend this exam?');
+          $(this).attr('disabled', true);
           if (!window.memwin || window.memwin.closed) {
             memwin = window.open("/student/take-exam/{{t.id}}", "myWin2", "toolbar=yes, scrollbars=yes, resizable=yes, height=590,width=1200");
           }
           window.memwin.focus()
-          location.reload();
-}
+})
 </script>
       {% endfor %}
     </table>
@@ -65,9 +71,7 @@
 <br><br><br><br><br><br>
 
 <script>
-  $(document).on('click', '.confirm-exam', function(){
-    return confirm('Are you sure you want to attend this exam?');
-})
+
 
   $(document).on('click', '.attempt-exam', function(){
     return confirm('You are not allowed to attempt again! Just View Result');

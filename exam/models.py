@@ -11,7 +11,7 @@ class Course(models.Model):
         return self.course_name
 
 class Question(models.Model):
-    course=models.ForeignKey(Course,on_delete=models.CASCADE)
+    course=models.ForeignKey(Course,on_delete=models.CASCADE,related_name='questions')
     marks=models.PositiveIntegerField()
     question=models.CharField(max_length=600)
     option1=models.CharField(max_length=200)

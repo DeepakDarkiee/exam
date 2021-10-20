@@ -29,6 +29,13 @@
 
       <label for="total_marks">Total Marks</label>
       {% render_field courseForm.total_marks class="form-control" placeholder="Example: 100" %}
+
+      <label for="duration">Duration(in-minutes)</label>
+      {% render_field courseForm.timer class="form-control" placeholder="Example: 100" %}
+
+      <label for="attempt">Next Attempt</label>
+      {% render_field courseForm.next_attempt class="form-control" placeholder="Example: 100" %}
+
     </div>
     
 

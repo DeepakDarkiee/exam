@@ -16,4 +16,5 @@ path('view-result', views.view_result_view,name='view-result'),
 path('check-marks/<int:pk>', views.check_marks_view,name='check-marks'),
 path('student-marks', views.student_marks_view,name='student-marks'),
 path('end-exam', views.end_exam,name='end-exam'),
+
 ]
