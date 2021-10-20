@@ -9,6 +9,9 @@ from datetime import date, timedelta
 from exam import models as QMODEL
 from student import models as SMODEL
 from exam import forms as QFORM
+from django.shortcuts import (get_object_or_404,
+                              render,
+                              HttpResponseRedirect)
 
 
 #for showing signup/login button for teacher
@@ -83,6 +86,22 @@ def delete_exam_view(request,pk):
     course=QMODEL.Course.objects.get(id=pk)
     course.delete()
     return HttpResponseRedirect('/teacher/teacher-view-exam')
+
+
+@login_required(login_url='teacherlogin')
+@user_passes_test(is_teacher)
+def update_exam_view(request,id):
+    context ={}
+    obj = get_object_or_404(QMODEL.Course, id = id)
+    courseForm = QFORM.CourseForm(request.POST or None, instance = obj)
+
+    if courseForm.is_valid():
+        courseForm.save()
+        return HttpResponseRedirect("/teacher/teacher-view-exam")
+
+    context["courseForm"] = courseForm    
+    return render(request, "teacher/teacher_update_exam.html",{'courseForm':courseForm})
+    
 
 @login_required(login_url='adminlogin')
 def teacher_question_view(request):

@@ -19,8 +19,14 @@
     .row {
       margin: 100px;
     }
+
+ 
+
   </style>
 </head>
+<br><br>
+<a href="/teacher/teacher-add-exam" style="margin-left:92%" type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></a>
+
 <br><br>
 <div class="container">
   <div class="panel panel-primary">
@@ -34,6 +40,8 @@
           <th>Course</th>
           <th>Total Question</th>
           <th>Total Marks</th>
+          <th>Duration</th>
+
           <th>Action</th>
         </tr>
       </thead>
@@ -43,10 +51,18 @@
         <td> {{t.course_name}}</td>
         <td>{{t.question_number}}</td>
         <td>{{t.total_marks}}</td>
+        <td>{{t.timer}} min</td>
 
 
-        <td><a class="btn btn-danger btn-xs confirm-delete" style="border-radius: 0%;" href="{% url 'delete-exam' t.id  %}"><span class="glyphicon glyphicon-trash"></span></a></td>
+
+        <td><a class="btn btn-danger btn-xs confirm-delete" style="border-radius: 0%;" href="{% url 'delete-exam' t.id  %}"><span class="glyphicon glyphicon-trash"></span></a>
+
+        <a class="btn btn-primary btn-xs" style="border-radius: 0%;" href="{% url 'update-exam' t.id  %}"><span class="glyphicon glyphicon-edit"></span></a>
+
+        
+        </td>
       </tr>
+   
       {% endfor %}
     </table>
   </div>
