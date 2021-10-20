@@ -2,8 +2,13 @@ from django.urls import path,include
 from django.contrib import admin
 from exam import views
 from django.contrib.auth.views import LogoutView,LoginView
+
+
+def trigger_error(request):
+    division_by_zero = 1 / 0
+    
 urlpatterns = [
-   
+    path('sentry-debug/', trigger_error),
     path('admin/', admin.site.urls),
     path('teacher/',include('teacher.urls')),
     path('student/',include('student.urls')),
