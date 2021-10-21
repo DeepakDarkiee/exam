@@ -34,7 +34,7 @@
           <th>Exam Name</th>
           <th>Number Of Questions</th>
           <th>Total Marks</th>
-          
+          <th>Duration</th>
           <th>Action</th>
         </tr>
       </thead>
@@ -44,6 +44,7 @@
         <td> {{t.course_name}}</td>
         <td> {{t.questions.count}}</td>
         <td> {{t.total_marks}}</td>
+        <td> {{t.timer}} min</td>
         
           
         {% if t.next_attempt %}

@@ -41,7 +41,13 @@
       <tr>
 
         <td> {{t.exam}}</td>
-        <td> {{t.marks}}</td>
+        
+        {% if t.marks == 0 %} 
+        <td><span style="color:red">{{t.marks}}</span> </td>
+        {% else %}
+        <td><span style="color:green">{{t.marks}}</span> </td>
+        {% endif %}
+
         <td>Attempt {{ forloop.counter }}</td>
         <td> {{t.date}}</td>
         
