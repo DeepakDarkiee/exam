@@ -116,7 +116,8 @@
     <div style="display:inline-block;">
     <li class="list-group-item">{{notice.description|title|safe}}<img src="/static/gif\new.gif">&nbsp;
       {% if notice.time is not None %}<span style="color:red">{{notice.time}}</span>{% endif %}</li>
-      
+      {% empty %}
+        <li class="list-group-item">No Notice Available <img src="/static/gif\new.gif">&nbsp;</li> 
       
 </div>
     {% endfor %}
